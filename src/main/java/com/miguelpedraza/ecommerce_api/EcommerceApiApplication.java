@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.miguelpedraza")
-@EnableJpaRepositories(basePackages = "com.miguelpedraza.ecommerce.product.infrastructure.repository")
-@EntityScan(basePackages = "com.miguelpedraza.ecommerce.product.domain")
+@EnableJpaRepositories(basePackages = "com.miguelpedraza.ecommerce")
+@EntityScan(basePackages = "com.miguelpedraza.ecommerce")
 public class EcommerceApiApplication {
 
     public static void main(String[] args) {
