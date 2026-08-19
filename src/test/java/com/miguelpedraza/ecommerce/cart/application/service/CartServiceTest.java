@@ -72,6 +72,7 @@ class CartServiceTest {
         Product product = createProduct(10L, "SKU-2", new BigDecimal("5.00"));
         Cart cart = new Cart(user);
         cart.addItem(product, 1);
+        when(productRepository.findById(10L)).thenReturn(Optional.of(product));
         when(cartRepository.findByUserId(1L)).thenReturn(Optional.of(cart));
         when(cartRepository.save(any(Cart.class))).thenAnswer(invocation -> invocation.getArgument(0));
 

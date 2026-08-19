@@ -50,6 +50,10 @@ public class CartService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException(productId));
 
+        if (!product.isActive()) {
+            throw new IllegalStateException("Product is unavailable: " + productId);
+        }
+
         Cart cart = getOrCreateCart(userId);
         cart.addItem(product, quantity);
         return cartRepository.save(cart);
@@ -58,6 +62,13 @@ public class CartService {
     public Cart updateItemQuantity(Long userId, Long productId, int quantity) {
         if (quantity <= 0) {
             throw new IllegalArgumentException("Quantity must be greater than zero");
+        }
+
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException(productId));
+
+        if (!product.isActive()) {
+            throw new IllegalStateException("Product is unavailable: " + productId);
         }
 
         Cart cart = cartRepository.findByUserId(userId)
